@@ -10,6 +10,6 @@ public class OracleDDL implements DDLStatement {
 
     @Override
     public String getDatabases() {
-        return " select name from SysDatabases order by name   ";
+        return " select name from SysDatabases order by name \n go  ";
     }
 }
