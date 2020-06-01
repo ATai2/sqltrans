@@ -1,0 +1,3 @@
+# Project exclude paths
+/sqltrans-core/target/
+/target/
