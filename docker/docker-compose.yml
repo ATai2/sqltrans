@@ -19,7 +19,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
       #SA用户密码
-      - SA_PASSWORD=asdf@1234
+      - SA_PASSWORD=asdfF@1234
 
 
 
@@ -27,13 +27,18 @@ services:
   #  docker run -d --name oracle \
   #  --privileged -v $(pwd)/oradata:/u01/app/oracle \
   #  -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee
-  oracle:
-    container_name: oracle
-    image: absolutapps/oracle-12c-ee
-    restart: always
-    ports:
-      - 8080:8080
-      - 1521:1521
+
+
+#  oracle:
+#    container_name: oracle
+#    image: absolutapps/oracle-12c-ee
+#    restart: always
+#    privileged: true
+#    ports:
+#      - 8080:8080
+#      - 1521:1521
+
+
 
 #  mysql:
 #    image: mysql:5.7
