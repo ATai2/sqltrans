@@ -7,6 +7,8 @@
 
 package com.ppx.example;
 
+import lombok.Builder;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
  * @author: zhuanghuan
  * @date: 2019年7月2日 下午5:11:43
  */
+@Builder
 public class DataServiceModel {
 	/**
 	 * 主键ID

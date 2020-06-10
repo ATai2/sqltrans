@@ -1,0 +1,12 @@
+字段名	字段别名	类型	长度	精度	必填	主键	备注
+内码	Id	Varchar	36		是	是
+国企组织内码	orgguid	Varchar	36		是
+关联组织内码	relationorgid	Varchar	36		是
+关联组织编号	relationorgcode	Varchar	256
+关联组织名称	relationorgname	Varchar	512
+备注	remark	Varchar	1,024
+关联类型	realtiontype	Char	1
+所属系统	systemid	Varchar	36
+停用标识	ishistory	char	1				1 是，0否
+
+

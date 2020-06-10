@@ -1,0 +1,7 @@
+-- tablename  tableComment
+IF NOT EXISTS(Select 1 From Sysobjects Where Name='tableName' AND TYPE ='U')
+create table tablename
+(
+    fields
+)
+GO
