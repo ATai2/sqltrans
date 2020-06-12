@@ -71,17 +71,18 @@ public class ExcelPoiReaderUtils {
 
     public static List<Map<String, Object>> readData(Sheet sheet, List<String> columns) {
         int rownum = sheet.getPhysicalNumberOfRows();
-        List<Map<String, Object>> list=new ArrayList<>();
+        List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 1; i < rownum; i++) {
             Row row = sheet.getRow(i);
-            Map<String,Object> rowMap=new HashMap<>();
+            Map<String, Object> rowMap = new HashMap<>();
             int physicalNumberOfCells = row.getPhysicalNumberOfCells();
             for (int j = 0; j < physicalNumberOfCells; j++) {
                 Cell cell = row.getCell(j);
                 if (cell == null) {
-                    continue;
+                    rowMap.put(columns.get(j), "");
+                } else {
+                    rowMap.put(columns.get(j), getCellValue(cell));
                 }
-                rowMap.put(columns.get(j), getCellValue(cell));
             }
             list.add(rowMap);
         }

@@ -1,0 +1,10 @@
+{
+  "createTabel": {
+    "mssql": "IF NOT EXISTS(Select 1 From Sysobjects Where Name='tableName' AND TYPE ='U')\ncreate table tableName\n(\nfields\n)\nGO",
+    "oracle": "declare\n      num int :=0;\nbegin\n    select count(1) into num from user_all_tables where table_name = upper('tabelName') ;\n    if num <= 0 then\n        execute immediate 'create table tabelName\n\t\t(\n\t\tfields\n\t\t)' ;\n    end if;\nend;\n/"
+  },
+  "insertDSM_ENTABLE": {
+    "mssql": "",
+    "oracle": ""
+  }
+}

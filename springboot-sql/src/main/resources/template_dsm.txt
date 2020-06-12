@@ -1,7 +1,12 @@
--- tablename  tableComment
-IF NOT EXISTS(Select 1 From Sysobjects Where Name='tableName' AND TYPE ='U')
-create table tablename
-(
-    fields
-)
-GO
+declare
+      num int :=0;
+begin
+    select count(1) into num from user_all_tables where table_name = upper('tabelName') ;
+    if num <= 0 then
+        execute immediate 'create table tabelName
+		(
+		 fields
+		)' ;
+    end if;
+end;
+/

@@ -57,6 +57,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.70</version>
         </dependency>
+        <dependency>
+            <groupId>org.ppx</groupId>
+            <artifactId>sqltrans-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

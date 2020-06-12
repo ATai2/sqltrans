@@ -9,8 +9,8 @@ public class ColumnCast implements FieldsToBean {
     @Override
     public CreateTableColumn cast2Bean(Map<String, Object> map) {
         CreateTableColumn createTableColumn = new CreateTableColumn();
-        createTableColumn.setAlias(map.get("字段名") + "");
-        createTableColumn.setFieldName(map.get("字段别名") + "");
+        createTableColumn.setFieldName(map.get("字段名") + "");
+        createTableColumn.setAlias(map.get("字段别名") + "");
         createTableColumn.setFieldType(map.get("类型") + "");
         String length = map.get("长度") + "";
         if (length.trim().length() > 0) {
@@ -36,10 +36,14 @@ public class ColumnCast implements FieldsToBean {
             createTableColumn.setPk(true);
         } else {
             createTableColumn.setPk(false);
-            if ("唯一索引".equalsIgnoreCase(pk.trim())) {
-                createTableColumn.setUnique(true);
-            }
         }
+
+        if ("唯一索引".equalsIgnoreCase(pk.trim())) {
+            createTableColumn.setUnique(true);
+        } else {
+            createTableColumn.setUnique(false);
+        }
+
         createTableColumn.setComment(map.get("备注") + "");
         return createTableColumn;
     }
