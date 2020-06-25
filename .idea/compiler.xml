@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sqltrans-core" />
         <module name="examples" />
+        <module name="example-hikari" />
         <module name="springboot-sql" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="example-hikari" options="-parameters" />
       <module name="springboot-sql" options="-parameters" />
     </option>
   </component>

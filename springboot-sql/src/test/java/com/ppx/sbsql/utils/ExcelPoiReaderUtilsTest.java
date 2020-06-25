@@ -8,6 +8,7 @@ import com.ppx.sbsql.table.CreateTableColumn;
 import com.ppx.sbsql.table.CreateTableModel;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.jupiter.api.Test;
@@ -54,11 +55,11 @@ class ExcelPoiReaderUtilsTest {
             }
             createTableModel.setColumnFields(list);
 
-//            to mssql
-            CreateTableCast createTableCast=new CreateTableCast();
-            String cast = createTableCast.cast(createTableModel, null,null);
-            result.append(cast).append("\r\n").append("\r\n");
-            System.out.println(JSON.toJSONString(createTableModel));
+////            to mssql
+//            CreateTableCast createTableCast=new CreateTableCast();
+//            String cast = createTableCast.cast(createTableModel, null,null);
+//            result.append(cast).append("\r\n").append("\r\n");
+//            System.out.println(JSON.toJSONString(createTableModel));
 
 //            to oracle
             CreateOracleTableCast createOracleTableCast=new CreateOracleTableCast();
@@ -136,5 +137,32 @@ class ExcelPoiReaderUtilsTest {
     }
 
 
+    @Test
+    public void test_replaceAll(){
+        String str = "declare\n" +
+                "      num int :=0;\n" +
+                "begin\n" +
+                "    select count(1) into num from user_all_tables where table_name =" +
+                " upper('tableName') ;\n" +
+                "    if num <= 0 then\n" +
+                "        execute immediate 'create table tableName\n" +
+                "\t\t(\n" +
+                "\t\tfields\n" +
+                "\t\t)' ;\n" +
+                "    end if;\n" +
+                "end;\n" +
+                "/";
+//        System.out.println(str.contains("num"));
+//        System.out.println(str.contains("upper"));
+//        System.out.println(str.contains("'tabelName'"));
+        System.out.println(StringUtils.countMatches(str, "tableName"));
+        System.out.println(str.contains("tableName"));
+        System.out.println(StringUtils.indexOf(str,"tableName"));
+//        System.out.println(StringUtils.indexOf(str,"'tableName'"));
+        System.out.println(str.replaceAll("tableName","aaa"));
+
+        String str2 = "lsjelfj tableName lskejfl ";
+        System.out.println(str2.contains("tableName"));
+    }
 
 }

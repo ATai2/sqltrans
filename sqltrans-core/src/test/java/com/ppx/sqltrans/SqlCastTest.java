@@ -16,9 +16,11 @@ public class SqlCastTest {
     @Test
     public void showDatabases() {
         String mysqlStr = "show databases;";
+        System.out.println(SQLUtils.formatMySql(mysqlStr));
 //        SQLUtils.parseStatements(mysqlStr, );
-        SQLExpr sqlExpr = SQLUtils.toMySqlExpr(mysqlStr);
+//        SQLExpr sqlExpr = SQLUtils.toMySqlExpr(mysqlStr);
+//
+//        System.out.println(JSONUtils.toJSONString(sqlExpr));
 
-        System.out.println(JSONUtils.toJSONString(sqlExpr));
     }
 }
