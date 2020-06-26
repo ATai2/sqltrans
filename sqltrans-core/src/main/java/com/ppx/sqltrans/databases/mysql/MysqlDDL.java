@@ -14,4 +14,5 @@ public class MysqlDDL implements DDLStatement {
     public String getDatabases() {
         return "show databases;";
     }
+
 }
