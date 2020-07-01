@@ -1,0 +1,30 @@
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        step: 1m
+        descriptions: true
+  web:
+    server:
+      auto-time-requests: true
+  endpoints:
+    prometheus:
+      id: springmetrics
+    web:
+      exposure:
+        include: "*"
+spring:
+  datasource:
+    test1:
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: dbc:mysql://94.191.68.209:13306/mall
+      username: root
+      password: root
+    test2:
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: dbc:mysql://94.191.68.209:13306/mysql
+      username: root
+      password: root

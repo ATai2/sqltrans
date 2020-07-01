@@ -4,6 +4,8 @@ import com.sqltrans.hikari.utils.BeanRegisterUtils;
 import com.sqltrans.hikari.utils.SpringBeanTools;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.HikariPoolMXBean;
+import com.zaxxer.hikari.metrics.prometheus.PrometheusMetricsTrackerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,12 +30,11 @@ public class DSController {
         config.setJdbcUrl("jdbc:mysql://94.191.68.209:13306/mysql");
         config.setPassword("root");
         config.setDriverClassName("com.mysql.jdbc.Driver");
-        BeanRegisterUtils.registerBean("HikariDataSource", HikariDataSource.class, config);
+        BeanRegisterUtils.registerBean("hikariDataSource", HikariDataSource.class, config);
+        config.setMetricsTrackerFactory(new PrometheusMetricsTrackerFactory());
 
-        HikariDataSource test = (HikariDataSource) SpringBeanTools.getBean("HikariDataSource");
+        HikariDataSource test = (HikariDataSource) SpringBeanTools.getBean("hikariDataSource");
         System.out.println(test);
-
-
         HikariConfig config1 = new HikariConfig();
         config1.setUsername("root");
         config1.setJdbcUrl("jdbc:mysql://94.191.68.209:13306/mall");
@@ -41,11 +42,11 @@ public class DSController {
         config1.setDriverClassName("com.mysql.jdbc.Driver");
         config1.setPoolName("hikari2");
         config1.setPoolName("test2");
-        BeanRegisterUtils.registerBean("HikariDataSource2",HikariDataSource.class, config1);
+        config1.setMetricsTrackerFactory(new PrometheusMetricsTrackerFactory());
+        BeanRegisterUtils.registerBean("hikariDataSource2",HikariDataSource.class, config1);
 
-        HikariDataSource test1 = (HikariDataSource) SpringBeanTools.getBean("HikariDataSource2");
+        HikariDataSource test1 = (HikariDataSource) SpringBeanTools.getBean("hikariDataSource2");
         System.out.println(test1);
-
         excute(dataSource);
         excute(test);
         excute(test1);
