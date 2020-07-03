@@ -31,4 +31,10 @@ scrape_configs:
     scrape_interval: 5s # 抓取时间间隔，这里每5s像数据源请求一次
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['192.168.12.193:8080'] # 这里是springBoot项目的地址
+      - targets: ['192.168.12.193:8085'] # 这里是springBoot项目的地址
+
+  - job_name: 'prometheus-metric' # job名称
+    scrape_interval: 5s # 抓取时间间隔，这里每5s像数据源请求一次
+    metrics_path: '/m'
+    static_configs:
+      - targets: ['192.168.12.193:8080'] # 这里是springBoot项目的地址machine

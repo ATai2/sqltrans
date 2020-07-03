@@ -16,14 +16,14 @@ management:
         include: "*"
 spring:
   datasource:
-    test1:
-      type: com.zaxxer.hikari.HikariDataSource
-      driverClassName: com.mysql.jdbc.Driver
-      url: dbc:mysql://94.191.68.209:13306/mall
-      username: root
-      password: root
+#    test1:
+#    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://94.191.68.209:13306/mall
+    username: root
+    password: root
     test2:
-      type: com.zaxxer.hikari.HikariDataSource
+#      type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.jdbc.Driver
       url: dbc:mysql://94.191.68.209:13306/mysql
       username: root

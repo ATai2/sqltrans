@@ -3,7 +3,9 @@ package com.sqltrans.hikari.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -43,5 +45,17 @@ public class BeanRegisterUtils {
         //向IOC容器中注入bean对象
         defaultListableBeanFactory.registerBeanDefinition(beanName, beanDefinition);
     }
+
+    public static <T> void removeBean(ConfigurableApplicationContext applicationContext, Class<T> cls){
+        String name = cls.getSimpleName();
+        name = name.replaceFirst(name.substring(0,1), name.substring(0,1).toLowerCase());
+        removeBean(applicationContext, name);
+    }
+
+    public static void removeBean(ConfigurableApplicationContext applicationContext, String beanName){
+        BeanDefinitionRegistry beanFactory = (BeanDefinitionRegistry) applicationContext.getBeanFactory();
+        beanFactory.removeBeanDefinition(beanName);
+    }
+
 
 }
