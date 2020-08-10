@@ -19,5 +19,11 @@
             <version>3.10</version>
         </dependency>
     </dependencies>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Atai2/sqltrans</url>
+        </repository>
+    </distributionManagement>
 </project>

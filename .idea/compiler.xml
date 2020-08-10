@@ -10,6 +10,7 @@
         <module name="sqltrans-core" />
         <module name="examples" />
         <module name="example-hikari" />
+        <module name="at-tools" />
         <module name="springboot-sql" />
       </profile>
     </annotationProcessing>
