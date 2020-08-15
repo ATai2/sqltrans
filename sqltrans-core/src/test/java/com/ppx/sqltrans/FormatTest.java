@@ -1,9 +1,11 @@
 package com.ppx.sqltrans;
 
 import com.alibaba.druid.sql.SQLUtils;
+import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.util.JdbcConstants;
-import com.ppx.sqltrans.databases.DataBaseConfig;
 import org.junit.Test;
+
+import java.util.List;
 
 public class FormatTest {
 
@@ -129,6 +131,14 @@ public class FormatTest {
         String format = SQLUtils.format(sql, JdbcConstants.SQL_SERVER);
         System.out.println(format);
 
+
+    }
+
+    @Test
+    public void test_ast() {
+        String dbType = JdbcConstants.MYSQL;
+        String sql = "SELECT id FROM order WHERE create_time > '2018-01-01'";
+        List<SQLStatement> statementList = SQLUtils.parseStatements(sql, dbType);
 
     }
 }
