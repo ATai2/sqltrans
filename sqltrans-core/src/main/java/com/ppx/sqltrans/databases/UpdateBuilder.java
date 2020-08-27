@@ -1,8 +1,8 @@
 package com.ppx.sqltrans.databases;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.inspur.dmp.constant.Constant;
-import org.apache.commons.lang.StringUtils;
+import com.ppx.sqltrans.tools.Constant;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -30,7 +30,7 @@ public class UpdateBuilder {
      * @param bean 数据DO
      * @return
      */
-    public <T> com.inspur.dmp.dbaccess.update.UpdateBuilder fields(T bean, Boolean preserveNullValue) {
+    public <T>  UpdateBuilder fields(T bean, Boolean preserveNullValue) {
         Table annotation = bean.getClass().getAnnotation(Table.class);
         String tableName = annotation.name();
         updateSB.append(tableName).append(" SET ");
@@ -57,7 +57,7 @@ public class UpdateBuilder {
      * @param wrapper
      * @return
      */
-    public com.inspur.dmp.dbaccess.update.UpdateBuilder where(Wrapper wrapper) {
+    public UpdateBuilder where(Wrapper wrapper) {
         StringBuilder whereClause = new StringBuilder().append(" where ");
         wrapper.convertNode2Sql(Constant.MYSQL_TYPE, whereClause, values);
         this.updateSB.append(whereClause.toString());

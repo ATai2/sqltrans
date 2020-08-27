@@ -1,10 +1,10 @@
 package com.ppx.sqltrans.databases.pagequery;
 
-import com.inspur.dmp.dbaccess.OrderByOrder;
-import com.inspur.dmp.exception.DmpException;
-import com.inspur.dmp.exception.ErrorCodeEnum;
-import org.apache.commons.lang.StringUtils;
 
+import com.ppx.sqltrans.DmpException;
+import com.ppx.sqltrans.ErrorCodeEnum;
+import com.ppx.sqltrans.databases.OrderByOrder;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * oracle dialect

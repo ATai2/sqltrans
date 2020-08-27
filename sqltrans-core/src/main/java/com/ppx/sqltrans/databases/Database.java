@@ -1,12 +1,7 @@
 package com.ppx.sqltrans.databases;
 
-import com.inspur.dmp.constant.Constant;
-import com.inspur.dmp.system.security.SpringApplicationContext;
-import com.inspur.dmp.utils.DesTools;
-import com.inspur.dmp.utils.GetPropUtils;
-import com.inspur.dmp.utils.po.DataSourceModel;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.ppx.sqltrans.tools.Constant;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.io.BufferedReader;
@@ -35,6 +30,8 @@ import java.util.*;
  * @author linchuan
  * @since 2018.6.6
  */
+
+@Slf4j
 public class Database {
 
 //	@Value("${spring.datasource.driver-class-name}")
@@ -53,11 +50,10 @@ public class Database {
 	/**
 	 * 数据库配置
 	 */
-	private com.inspur.dmp.dbaccess.ConnConfig connConfig = null;
+	private  ConnConfig connConfig = null;
 
-	private Log log = LogFactory.getLog(com.inspur.dmp.dbaccess.Database.class);
 
-	private Database(Connection conn, com.inspur.dmp.dbaccess.ConnConfig connConfig) {
+	private Database(Connection conn, ConnConfig connConfig) {
 		this.conn = conn;
 		this.connConfig = connConfig;
 	}
@@ -69,18 +65,19 @@ public class Database {
 	 * @throws IOException  加载配置文件出错
 	 * @throws SQLException
 	 */
-	public static com.inspur.dmp.dbaccess.Database getInstance() {
-		DataSourceModel dataSourceModel = (DataSourceModel) SpringApplicationContext.getBean("dataSourceModel");
-		String className = dataSourceModel.getDriveClassName();
-		String url = dataSourceModel.getUrl();
-		String username = dataSourceModel.getUserName();
-		String password = dataSourceModel.getPassword();
-		com.inspur.dmp.dbaccess.ConnConfig config = new com.inspur.dmp.dbaccess.ConnConfig();
-		config.setDriverClass(className);
-		config.setJdbcUrl(url);
-		config.setUserName(username);
-		config.setPassword(password);
-		return getInstance(config);
+	public static Database getInstance() {
+		return null;
+//		DataSourceModel dataSourceModel = (DataSourceModel) SpringApplicationContext.getBean("dataSourceModel");
+//		String className = dataSourceModel.getDriveClassName();
+//		String url = dataSourceModel.getUrl();
+//		String username = dataSourceModel.getUserName();
+//		String password = dataSourceModel.getPassword();
+//		ConnConfig config = new ConnConfig();
+//		config.setDriverClass(className);
+//		config.setJdbcUrl(url);
+//		config.setUserName(username);
+//		config.setPassword(password);
+//		return getInstance(config);
 	}
 
 	/**
@@ -90,26 +87,26 @@ public class Database {
 	 * @return 数据库操作实例
 	 * @throws SQLException
 	 */
-	public static com.inspur.dmp.dbaccess.Database getInstance(String dbcpID) {
-		com.inspur.dmp.dbaccess.ConnConfig config = getConnConfig(dbcpID);
+	public static Database getInstance(String dbcpID) {
+		ConnConfig config = getConnConfig(dbcpID);
 		return getInstance(config);
 	}
 
 	/**
 	 * 获取一个新的Database实例
 	 *
-	 * @param connConfig 数据库连接实体类{@link com.inspur.dmp.dbaccess.ConnConfig}
+	 * @param connConfig 数据库连接实体类{@link ConnConfig}
 	 * @return 数据库操作实例
 	 * @throws SQLException
 	 */
-	public static com.inspur.dmp.dbaccess.Database getInstance(com.inspur.dmp.dbaccess.ConnConfig connConfig) {
+	public static Database getInstance(ConnConfig connConfig) {
 		Connection conn = null;
 		try {
 			conn = produceConn(connConfig);
 		} catch (SQLException e) {
 			throw new RuntimeException("获取数据库连接失败！", e);
 		}
-		com.inspur.dmp.dbaccess.Database db = new com.inspur.dmp.dbaccess.Database(conn, connConfig);
+		Database db = new Database(conn, connConfig);
 
 		return db;
 	}
@@ -173,9 +170,9 @@ public class Database {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static boolean canConnect(com.inspur.dmp.dbaccess.ConnConfig connConfig) {
+	public static boolean canConnect(ConnConfig connConfig) {
 		try {
-			com.inspur.dmp.dbaccess.Database database = getInstance(connConfig);
+			Database database = getInstance(connConfig);
 			database.releasConn();
 			return true;
 		} catch (Exception e) {
@@ -195,7 +192,7 @@ public class Database {
 	 */
 	public static boolean canConnect(String dbcpID) {
 		try {
-			com.inspur.dmp.dbaccess.Database database = getInstance(dbcpID);
+			Database database = getInstance(dbcpID);
 			database.releasConn();
 			return true;
 		} catch (Exception e) {
@@ -900,9 +897,9 @@ public class Database {
 	 * @author linchuan
 	 * @date 2018年9月29日
 	 */
-	private static Connection produceConn(com.inspur.dmp.dbaccess.ConnConfig connConfig) throws SQLException {
+	private static Connection produceConn(ConnConfig connConfig) throws SQLException {
 		Connection conn = null;
-		DataSource dataSource = com.inspur.dmp.dbaccess.DatabaseAdapter.getDataSource(connConfig);
+		DataSource dataSource = DatabaseAdapter.getDataSource(connConfig);
 		conn = dataSource.getConnection();
 		return conn;
 	}
@@ -972,28 +969,29 @@ public class Database {
 	 * @param dbcpID 数据源id
 	 * @return
 	 */
-	private static com.inspur.dmp.dbaccess.ConnConfig getConnConfig(String dbcpID) {
-		com.inspur.dmp.dbaccess.Database database = com.inspur.dmp.dbaccess.Database.getInstance();
-		String sql = "select DBCP_DBURL jdbcUrl, DBCP_DRIVERCLASS driverClass, DBCP_DBUSERNAME userName, DBCP_DBPASSWORD password, "
-				+ " DBCP_INITIALPOOLSIZE initialPoolSize, DBCP_MAXIDLETIME maxIdleTime, DBCP_MAXPOOLSIZE maxPoolSize, DBCP_MINPOOLSIZE minPoolSize, DBCP_MAXSTATEMENTS maxStatements"
-				+ " from DSM_DBCP where DBCP_ID=?";
-
-		List<com.inspur.dmp.dbaccess.ConnConfig> config = null;
-		try {
-			config = database.getObjectList(sql, new Object[]{dbcpID}, com.inspur.dmp.dbaccess.ConnConfig.class);
-		} catch (InstantiationException | IllegalAccessException | SQLException e) {
-			e.printStackTrace();
-		}
-		if (null == config || config.size() == 0) {
-			return null;
-		}
-		com.inspur.dmp.dbaccess.ConnConfig connConfig = config.get(0);
-		String password = DesTools.decryptPassword(connConfig.getPassword());
-		connConfig.setPassword(password);
-		connConfig.setMaxPoolSize(10);
-		//连接池名字默认为该数据库连接的主键
-		connConfig.setPoolID(dbcpID);
-		return connConfig;
+	private static ConnConfig getConnConfig(String dbcpID) {
+		return  null;
+//		Database database = Database.getInstance();
+//		String sql = "select DBCP_DBURL jdbcUrl, DBCP_DRIVERCLASS driverClass, DBCP_DBUSERNAME userName, DBCP_DBPASSWORD password, "
+//				+ " DBCP_INITIALPOOLSIZE initialPoolSize, DBCP_MAXIDLETIME maxIdleTime, DBCP_MAXPOOLSIZE maxPoolSize, DBCP_MINPOOLSIZE minPoolSize, DBCP_MAXSTATEMENTS maxStatements"
+//				+ " from DSM_DBCP where DBCP_ID=?";
+//
+//		List<ConnConfig> config = null;
+//		try {
+//			config = database.getObjectList(sql, new Object[]{dbcpID}, ConnConfig.class);
+//		} catch (InstantiationException | IllegalAccessException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//		if (null == config || config.size() == 0) {
+//			return null;
+//		}
+//		ConnConfig connConfig = config.get(0);
+//		String password = DesTools.decryptPassword(connConfig.getPassword());
+//		connConfig.setPassword(password);
+//		connConfig.setMaxPoolSize(10);
+//		//连接池名字默认为该数据库连接的主键
+//		connConfig.setPoolID(dbcpID);
+//		return connConfig;
 	}
 
 	/**
@@ -1306,15 +1304,16 @@ public class Database {
 	 * @date 2019年6月21日
 	 */
 	private void printSql(String sql, String params) {
-		if (this.log.isInfoEnabled()) {
-			this.log.info("Executing SQL statement:" + (sql != null ? "[ " + sql + " ]" : ""));
-			if (null != params && !"".equals(params)) {
-				this.log.info(params);
-			}
-			java.util.Date today = new java.util.Date();
-			java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			this.log.info("Now is:" + dateTimeFormat.format(today));
-		}
+		return;
+//		if (this.log.isInfoEnabled()) {
+//			this.log.info("Executing SQL statement:" + (sql != null ? "[ " + sql + " ]" : ""));
+//			if (null != params && !"".equals(params)) {
+//				this.log.info(params);
+//			}
+//			java.util.Date today = new java.util.Date();
+//			java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			this.log.info("Now is:" + dateTimeFormat.format(today));
+//		}
 	}
 
 	/**
@@ -1399,10 +1398,6 @@ public class Database {
 			}
 			return str;
 		}
-	}
-
-	public static Boolean isJpaDbType() {
-		return Constant.DATABASE_JPA_LIST.contains(GetPropUtils.getValue(Constant.DBTYPE));
 	}
 
 }

@@ -1,9 +1,10 @@
 package com.ppx.sqltrans.databases.select;
 
+
 import cn.hutool.core.util.ReflectUtil;
-import com.inspur.dmp.constant.Constant;
-import Wrapper;
-import org.apache.commons.lang.StringUtils;
+import com.ppx.sqltrans.databases.Wrapper;
+import com.ppx.sqltrans.tools.Constant;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -21,7 +22,6 @@ public class SelectBuilder {
 
     private List<String> keys = new ArrayList<>();
     private List<Object> values = new ArrayList<>();
-
 
 
     public SelectBuilder where(Wrapper wrapper) {
@@ -59,9 +59,10 @@ public class SelectBuilder {
             String fieldNameAnno = column.name();
             String fieldName = field.getName();
 
-            this.keys.add(fieldNameAnno + " AS '" +fieldName+"'");
+            this.keys.add(fieldNameAnno + " AS '" + fieldName + "'");
         }
-        selectSB.append(StringUtils.join(this.keys,",")).append(" from ").append(tClass.getAnnotation(Table.class).name());
+        selectSB.append(StringUtils.join(this.keys, ","))
+                .append(" from ").append(tClass.getAnnotation(Table.class).name());
         return this;
     }
 }

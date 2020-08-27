@@ -1,10 +1,12 @@
 package com.ppx.sqltrans.databases.pagequery;
 
-import com.inspur.dmp.constant.Constant;
-import com.inspur.dmp.dbaccess.OrderByOrder;
-import Wrapper;
-import com.inspur.dmp.exception.DmpException;
-import com.inspur.dmp.exception.ErrorCodeEnum;
+
+import com.ppx.sqltrans.DmpException;
+import com.ppx.sqltrans.ErrorCodeEnum;
+import com.ppx.sqltrans.databases.OrderByOrder;
+import com.ppx.sqltrans.databases.Wrapper;
+import com.ppx.sqltrans.tools.Constant;
+
 
 import java.util.ArrayList;
 import java.util.List;

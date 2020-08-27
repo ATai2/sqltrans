@@ -1,12 +1,12 @@
 package com.ppx.sqltrans.databases;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.inspur.dmp.dbaccess.delete.DeleteBuilder;
-import com.inspur.dmp.dbaccess.insert.InsertBuilder;
-import com.inspur.dmp.dbaccess.select.SelectBuilder;
-import com.inspur.dmp.dbaccess.update.UpdateBuilder;
-import com.inspur.dmp.exception.DmpException;
-import com.inspur.dmp.exception.ErrorCodeEnum;
+
+import com.ppx.sqltrans.DmpException;
+import com.ppx.sqltrans.ErrorCodeEnum;
+import com.ppx.sqltrans.databases.delete.DeleteBuilder;
+import com.ppx.sqltrans.databases.insert.InsertBuilder;
+import com.ppx.sqltrans.databases.select.SelectBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ import java.util.Optional;
  */
 public class BaseDao<T> implements BaseMapper<T> {
 
-    Logger logger = LoggerFactory.getLogger(com.inspur.dmp.dbaccess.BaseDao.class);
+    Logger logger = LoggerFactory.getLogger( BaseDao.class);
     private Database database;
 
     public void setConnection(Database database) {

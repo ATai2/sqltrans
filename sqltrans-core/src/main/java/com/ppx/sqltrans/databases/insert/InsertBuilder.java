@@ -1,9 +1,8 @@
 package com.ppx.sqltrans.databases.insert;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.inspur.dmp.exception.DmpException;
-import com.inspur.dmp.exception.ErrorCodeEnum;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -32,9 +31,9 @@ public class InsertBuilder {
      * @return
      */
     public InsertBuilder table(String tableName) {
-        if (Objects.isNull(tableName)) {
-            throw new DmpException(ErrorCodeEnum.SYS_ERROR.getCode(), "tableName 不能为空");
-        }
+//        if (Objects.isNull(tableName)) {
+//            throw new DmpException(ErrorCodeEnum.SYS_ERROR.getCode(), "tableName 不能为空");
+//        }
 //        if (!Objects.isNull(sql)) {
 //            throw new DmpException(ErrorCodeEnum.SYS_ERROR.getCode(), "sqlClause，table方法不能同时使用");
 //        }

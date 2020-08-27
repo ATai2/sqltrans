@@ -18,7 +18,7 @@ import java.util.function.BiConsumer;
  *
  */
 public class DatabaseAdapter {
-    private static Logger logger = LoggerFactory.getLogger(com.inspur.dmp.dbaccess.DatabaseAdapter.class);
+    private static Logger logger = LoggerFactory.getLogger(DatabaseAdapter.class);
     static ConcurrentHashMap<String, DataSource> dataSourceConcurrentHashMap = new ConcurrentHashMap<>(4);
 
     // 预防内存泄漏

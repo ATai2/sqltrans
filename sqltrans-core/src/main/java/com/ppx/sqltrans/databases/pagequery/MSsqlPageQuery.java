@@ -1,6 +1,7 @@
 package com.ppx.sqltrans.databases.pagequery;
 
-import com.inspur.dmp.dbaccess.OrderByOrder;
+
+import com.ppx.sqltrans.databases.OrderByOrder;
 
 public class MSsqlPageQuery implements IPageQuery {
 

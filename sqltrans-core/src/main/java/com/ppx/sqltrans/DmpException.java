@@ -31,5 +31,4 @@ public class DmpException extends RuntimeException {
         this.code = exceptionEnum.getCode();
         this.msg = exceptionEnum.getMsg();
     }
-
 }
