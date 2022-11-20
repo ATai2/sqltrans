@@ -1,6 +1,6 @@
-package com.ppx.sqltrans.databases.oracle;
+package com.ppx.sqltrans.db.databases.oracle;
 
-import com.ppx.sqltrans.databases.DDLStatement;
+import com.ppx.sqltrans.db.databases.DDLStatement;
 
 public class OracleDDL implements DDLStatement {
     @Override

@@ -1,18 +1,14 @@
 package com.ppx.sqltrans;
 
 import com.alibaba.druid.sql.SQLUtils;
-import com.alibaba.druid.sql.ast.SQLExpr;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
 import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlOutputVisitor;
 import com.alibaba.druid.sql.parser.SQLStatementParser;
-import com.alibaba.druid.support.json.JSONUtils;
-import com.ppx.sqltrans.tools.Tools;
+import com.ppx.sqltrans.db.databases.tools.Tools;
 import org.junit.Test;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class SqlCastTest {
 

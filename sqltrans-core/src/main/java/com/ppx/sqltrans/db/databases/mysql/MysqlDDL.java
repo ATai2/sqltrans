@@ -1,6 +1,6 @@
-package com.ppx.sqltrans.databases.mysql;
+package com.ppx.sqltrans.db.databases.mysql;
 
-import com.ppx.sqltrans.databases.DDLStatement;
+import com.ppx.sqltrans.db.databases.DDLStatement;
 
 public class MysqlDDL implements DDLStatement {
 

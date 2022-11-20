@@ -1,4 +1,4 @@
-package com.ppx.sqltrans;
+package com.ppx.sqltrans.db.databases;
 
 public class SqlCast {
 

@@ -2,7 +2,6 @@ package com.ppx.sqltrans;
 
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.util.JdbcConstants;
-import com.ppx.sqltrans.databases.DataBaseConfig;
 import org.junit.Test;
 
 public class FormatTest {

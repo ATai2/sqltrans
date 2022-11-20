@@ -1,4 +1,4 @@
-package com.ppx.sqltrans.tools;
+package com.ppx.sqltrans.db.databases.tools;
 
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.oracle.visitor.OracleOutputVisitor;

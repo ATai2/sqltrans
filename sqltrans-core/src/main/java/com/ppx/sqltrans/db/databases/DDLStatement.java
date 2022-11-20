@@ -1,4 +1,4 @@
-package com.ppx.sqltrans.databases;
+package com.ppx.sqltrans.db.databases;
 
 public interface DDLStatement {
     String getCreateDatabase();
