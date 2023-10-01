@@ -10,10 +10,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>sqltrans-core</module>
-        <module>examples</module>
         <module>springboot-sql</module>
         <module>example-hikari</module>
         <module>at-tools</module>
+        <module>at-hiber</module>
     </modules>
 
     <properties>
@@ -32,6 +32,9 @@
             <version>4.13.1</version>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+
+    </dependencyManagement>
     <distributionManagement>
         <repository>
             <id>github</id>

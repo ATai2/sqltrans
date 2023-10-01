@@ -83,13 +83,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>12.1.0.1-atlassian-hosted</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
@@ -114,14 +108,7 @@
             <artifactId>postgresql</artifactId>
             <version>42.4.1</version>
         </dependency>
-        <!-- Kingbase数据库驱动 -->
-<!--        <dependency>-->
-<!--            <groupId>com.kingbase</groupId>-->
-<!--            <artifactId>kingbasejdbc4</artifactId>-->
-<!--            <version>7.0.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/src/lib/kingbasejdbc4.jar</systemPath>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
